@@ -1,0 +1,169 @@
+<button type="button"  class="btn btn-primary" (click)="add()">ADD NEW USER</button>
+<button type="button"  class="btn btn-danger" (click)="close1()">CLOSE FORM</button>
+<div *ngIf="close">
+<h2 style="margin-left: 200px;margin-bottom: 30px;"><i class="glyphicon glyphicon-pencil"></i> Setup your account</h2>
+<form #myForm="ngForm" (ngSubmit)="submit(myForm.value)" style="margin-left: 300px;">
+        <div class="form-group row">
+          <label for="name" class="col-sm-1 col-form-label">Name</label>
+          <div class="col-sm-5">
+            <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Jhon">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-1 col-form-label">Email Address</label>
+          <div class="col-sm-5">
+            <input type="email" ngModel name="email" class="form-control" id="email" placeholder="jhon1232gmail.com">
+          </div>
+        </div>
+        <div class="form-group row">
+                <label for="username" class="col-sm-1 col-form-label">Username</label>
+                <div class="col-sm-5">
+                  <input type="text" ngModel name="username" class="form-control" id="username" placeholder="jhon123">
+                </div>
+              </div>
+              <div class="form-group row">
+                    <label for="password" class="col-sm-1 col-form-label">Password</label>
+                    <div class="col-sm-5">
+                      <input type="password" name="password" ngModel class="form-control" id="password" placeholder="*********">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                        <label for="company" class="col-sm-1 col-form-label">Company</label>
+                        <div class="col-sm-5">
+                          <input type="text" ngModel name="company" class="form-control" id="text" placeholder="TCS">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                            <label for="country" class="col-sm-1 col-form-label">Country</label>
+                            <div class="col-sm-5">
+                                    <select id="country" ngModel name="country" class="form-control">
+                                            <option selected>INDIA</option>
+                                            <option>CHAINA</option>
+                                            <option>SRI LANKA</option>
+                                            <option>USA</option>
+                                            <option>GERMANY</option>
+                                            <option>ITALY</option>
+                                            <option>SWEDEN</option>
+                                            <option>ENGLAND</option>
+                                            <option>SOUTH AFRICA</option>
+                                          </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                                <label for="timezone" class="col-sm-1 col-form-label">TimeZone</label>
+                                <div class="col-sm-5">
+                                        <select id="timezone" ngModel name="timezone" class="form-control">
+                                                <option selected>	UTC+05:30 (IST) -INDIA</option>
+                                                <option>UTC−12:00 (unofficial) — Baker Island and Howland Island</option>
+                                                <option>UTC−04:00 (AST) — Puerto Rico, the U.S. Virgin Islands</option>
+                                                <option>UTC+11:00 (NFT) — Norfolk Island</option>
+                                                <option>UTC+01:00 — (CET) — metropolitan Denmark</option>
+                                                <option>UTC+12:45 — Chatham Islands</option>
+                                                <option>UTC+08:00 (Chinese Standard Time)</option>
+                                                <option>UTC+03:00 — Prince Edward Islands</option>
+                                                <option>UTC+05:30 (SLST)</option>
+                                              </select>        
+                                </div>
+                              </div>    
+                              <button type="submit" class="btn btn-primary" style="margin-left: 200px;padding:10px 80px">Sign in</button>                  
+        </form>
+</div>
+        <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">USER NAME</th>
+                        <th scope="col">PASSWORD</th>
+                        <th scope="col">COMPANY</th>
+                        <th scope="col">COUNTRY</th>
+                        <th scope="col">TIME ZOME</th>
+                        <th scope="col">EDIT</th>
+                        <th scope="col">DELETE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let obj of data;let i=index">
+                        <td>{{obj.id}}</td>
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.email}}</td>
+                        <td>{{obj.username}}</td>
+                        <td>{{obj.password}}</td>
+                        <td>{{obj.company}}</td>
+                        <td>{{obj.country}}</td>
+                        <td>{{obj.timezone}}</td>
+                        <td><button type="button" class="btn btn-primary" (click)="edit(obj)">EDIT</button></td>
+                        <td><button type="button" class="btn btn-danger" (click)="delete(obj,i)">DELETE</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div *ngIf="editclose">
+            <form *ngIf="editedobj" style="margin-left: 300px;">
+                    <div class="form-group row">
+                      <label for="name" class="col-sm-1 col-form-label">Name</label>
+                      <div class="col-sm-5">
+                        <input type="text" [(ngModel)]="editedobj.name" name="name" class="form-control" id="name" placeholder="Jhon">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="email" class="col-sm-1 col-form-label">Email Address</label>
+                      <div class="col-sm-5">
+                        <input type="email" [(ngModel)]="editedobj.email" name="email" class="form-control" id="email" placeholder="jhon1232gmail.com">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                            <label for="username" class="col-sm-1 col-form-label">Username</label>
+                            <div class="col-sm-5">
+                              <input type="text" [(ngModel)]="editedobj.username" name="username" class="form-control" id="username" placeholder="jhon123">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                                <label for="password" class="col-sm-1 col-form-label">Password</label>
+                                <div class="col-sm-5">
+                                  <input type="password" [(ngModel)]="editedobj.password" name="password" ngModel class="form-control" id="password" placeholder="*********">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                    <label for="company" class="col-sm-1 col-form-label">Company</label>
+                                    <div class="col-sm-5">
+                                      <input type="text" [(ngModel)]="editedobj.company" name="company" class="form-control" id="text" placeholder="TCS">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                        <label for="country" class="col-sm-1 col-form-label">Country</label>
+                                        <div class="col-sm-5">
+                                                <select id="country" [(ngModel)]="editedobj.country" name="country" class="form-control">
+                                                        <option selected>INDIA</option>
+                                                        <option>CHAINA</option>
+                                                        <option>SRI LANKA</option>
+                                                        <option>USA</option>
+                                                        <option>GERMANY</option>
+                                                        <option>ITALY</option>
+                                                        <option>SWEDEN</option>
+                                                        <option>ENGLAND</option>
+                                                        <option>SOUTH AFRICA</option>
+                                                      </select>
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                            <label for="timezone" class="col-sm-1 col-form-label">TimeZone</label>
+                                            <div class="col-sm-5">
+                                                    <select id="timezone" [(ngModel)]="editedobj.timezone" name="timezone" class="form-control">
+                                                            <option selected>	UTC+05:30 (IST) -INDIA</option>
+                                                            <option>UTC−12:00 (unofficial) — Baker Island and Howland Island</option>
+                                                            <option>UTC−04:00 (AST) — Puerto Rico, the U.S. Virgin Islands</option>
+                                                            <option>UTC+11:00 (NFT) — Norfolk Island</option>
+                                                            <option>UTC+01:00 — (CET) — metropolitan Denmark</option>
+                                                            <option>UTC+12:45 — Chatham Islands</option>
+                                                            <option>UTC+08:00 (Chinese Standard Time)</option>
+                                                            <option>UTC+03:00 — Prince Edward Islands</option>
+                                                            <option>UTC+05:30 (SLST)</option>
+                                                          </select>        
+                                            </div>
+                                          </div>    
+                                          <button type="submit" class="btn btn-primary" style="margin-left: 200px;padding:10px 80px" (click)="updateUser(edituser)">Update</button>                  
+                    </form>   
+                    </div>        
